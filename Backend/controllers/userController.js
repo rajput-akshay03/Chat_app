@@ -56,7 +56,6 @@ const authUser = async(req,res)=>{
                 pic:user.pic,
                 token:token
             })
-
          }
          else{
             res.json({
