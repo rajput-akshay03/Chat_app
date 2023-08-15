@@ -1,0 +1,47 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
+.inputs{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    gap: 2px;
+    font-size: small;
+}
+.input{
+    padding: 6px;
+    font-size: 15px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    outline: none;
+    cursor: text;
+    background-color: whitesmoke;
+}
+.btn{
+    margin-top: 15px;
+    padding: 12px;
+    width: 80%;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+#btn1{
+    background-color: rgb(130, 130, 248);
+    border: 1px solid gray;
+}
+#btn2{
+    background-color: rgb(245, 82, 82);
+    border: 1px solid gray;
+}
