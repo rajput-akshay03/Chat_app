@@ -51,7 +51,7 @@ const authUser = async(req,res)=>{
                 {expiresIn:'30d'})
             res.json({
                 _id:user._id,
-                name:user.Name,
+                name:user.name,
                 email:user.email,
                 pic:user.pic,
                 token:token
@@ -72,4 +72,19 @@ const authUser = async(req,res)=>{
           })
     }
 }
-module.exports = {registerUser,authUser}
+const allUsers = async(req,res)=>{
+    const keyword = req.query.search?{
+        $or:[
+            {name:{$regex:req.query.search,$options:"i"}},
+            {email:{$regex:req.query.search,$options:"i"}}
+        ]
+    }:{};
+  const Users = await User.find(keyword).find({id:{$ne:req.user.id}})
+ 
+   res.json(
+    {
+       Users
+    }
+   )
+}
+module.exports = {registerUser,authUser,allUsers}
