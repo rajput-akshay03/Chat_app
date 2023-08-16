@@ -1,18 +1,52 @@
 import React, { useState } from "react";
+import {toast,ToastContainer} from 'react-toastify';
+import {useNavigate} from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+
 import './css/Login.css'
 function Signup(){
+    // const navigate = useNavigate();
+    
     const [formdata,setdata] = useState({name:"",email:"",password:"",confirm_password:"",picture:""})
       const inputhandle= (e)=>{ 
             setdata(values=>({...values , [e.target.name]: e.target.value}));
-           console.log(formdata)
       }
-      function handleSubmit(e){
-        console.log(formdata);
+      const handleSubmit=async(e)=>{
         e.preventDefault();
-      }
-      
+        if(!formdata.name || !formdata.email || !formdata.password || !formdata.confirm_password)
+        {
+            console.log("please fill all details");
+            toast("fill all details");
+            e.preventDefault();
+            
+            return ;
+        }
+        if(formdata.password!==formdata.confirm_password)
+        {
+            toast("password and confirm password not same")
+            e.preventDefault();
+            return;
+        }
+        else{
+            const config = {
+                headers : {
+                    "Content-type":"application/json",
+                },
+            }         
+        const name = formdata.name;
+        const email = formdata.email;
+        const password = formdata.password;
+        const pic = formdata.pic;
+            const {data} = await axios.post("http://localhost:4000/api/user",{name,email,password,pic},config);
+          localStorage.setItem("userInfo",JSON.stringify(data));
+          console.log(formdata)
+          toast("signup successfully")
+          
+        //   navigate("/api/user");
+        } 
+      }  
     return(
-        
         <div>
             <form action="" className="form"  onSubmit={handleSubmit}>
                 <div  className="inputs">
@@ -36,6 +70,7 @@ function Signup(){
                     <input type="file" id="file" className="input" onChange={inputhandle} name="picture"/>
                 </div>
                 <button className="btn" id="btn2">Signup</button>
+                <ToastContainer/>
             </form>
         </div>
     )

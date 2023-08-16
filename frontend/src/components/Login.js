@@ -5,7 +5,7 @@ function Login(){
       const inputhandle= (e)=>{ 
             setdata(values=>({...values , [e.target.name]: e.target.value}));
       }
-      function handleSubmit(e){
+      const handleSubmit = async(e)=>{
         console.log(formdata);
         e.preventDefault();
       }
