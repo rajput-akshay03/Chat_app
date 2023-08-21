@@ -66,4 +66,42 @@ const fetchchats = async(req,res)=>{
      })
   }
 }
-module.exports = {accessChat,fetchchats};
+const createGroup = async(req,res)=>{
+   if(!req.body.users||!req.body.name){
+      return res.status(400).send({message:"fill all details"});
+   }
+   var users= JSON.parse(req.body.users);
+   if(users.length<2)
+   {
+     return res.status(400).send("more than two users are required")
+   }
+   users.push(req.user);
+   try{
+    const groupchat =await Chat.create({
+      chatName:req.body.name,
+      users:users,
+      isGroupChat:true,
+      groupAdmin:req.user
+     })
+     console.log(groupchat)
+     const fullgroup = await Chat.findOne({_id:groupchat._id})
+     .populate("users","-password")
+     .populate("groupAdmin","-password");
+     res.json({fullgroup})
+   }
+   catch(err){
+    res.json({err})
+   }
+   
+}
+const renameGroup = async(req,res)=>{
+    const {chatId,chatName} = req.body;
+    const updatedchat = await Chat.findByIdAndUpdate(chatId,{chatName},{new:true})
+    .populate("users","-password").populate("groupAdmin","-password");
+}
+const addToGroup = async(req,res)=>{
+    const {chatId,userId} = req.body;
+  const add = await Chat.findByIdAndUpdate(chatId,{$push:{users:userId}},{new:true})
+  .populate("users","-password").populate("groupAdmin","-password");
+}
+module.exports = {accessChat,fetchchats,createGroup,renameGroup,addToGroup};
