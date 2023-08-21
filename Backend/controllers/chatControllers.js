@@ -101,7 +101,32 @@ const renameGroup = async(req,res)=>{
 }
 const addToGroup = async(req,res)=>{
     const {chatId,userId} = req.body;
-  const add = await Chat.findByIdAndUpdate(chatId,{$push:{users:userId}},{new:true})
+  const added = await Chat.findByIdAndUpdate(chatId,{$push:{users:userId}},{new:true})
   .populate("users","-password").populate("groupAdmin","-password");
+  if(!add)
+  {
+    res.status(400);
+    res.send("no chat found");
+  }
+  else{
+    res.json({
+      added
+    })
+  }
 }
-module.exports = {accessChat,fetchchats,createGroup,renameGroup,addToGroup};
+const removeFromGroup = async(req,res)=>{
+  const {chatId,userId} = req.body;
+const deleted = await Chat.findByIdAndDelete(chatId,{$pull :{users:userId}},{new:true})
+.populate("users","-password").populate("groupAdmin","-password");
+if(!deleted)
+{
+  res.status(400);
+  res.send("no chat found");
+}
+else{
+  res.json({
+    deleted
+  })
+}
+}
+module.exports = {accessChat,fetchchats,createGroup,renameGroup,addToGroup,removeFromGroup};
