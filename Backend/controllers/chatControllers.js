@@ -11,14 +11,15 @@ const accessChat = async(req,res)=>{
       var isChat = await Chat.find({
         isGroupChat:false,
         $and:[
-            { users:{$elemMatch:{$eq:req.user._id}}},
-            { users:{$elemMatch:{$eq:req.userId}}}
+            { users:{$elemMatch:{$eq:req.user.id}}},
+            { users:{$elemMatch:{$eq:userId}}}
         ],
       }).populate("users","-password").populate("latestMessage");
           isChat = await User.populate(isChat,{
             path:"latestMesaage.sender",
             select:"name pic email"
       })
+      console.log(isChat);
       if(isChat.length>0)
       {
         res.send(isChat[0]);
@@ -42,4 +43,27 @@ const accessChat = async(req,res)=>{
         }
       }
 }
-module.exports = accessChat;
+const fetchchats = async(req,res)=>{
+  try{
+      const result =  await Chat.find({users:{$elemMatch:{$eq:req.user.id}}})
+       .populate("users","-password")
+       .populate("groupAdmin","-password")
+       .populate("latestMessage")
+       .sort({updatedAt:-1}).then(async(result)=>{
+        result = await User.populate(result,{
+          path:"latestMessage.sender",
+          select:"name pic email"
+        })
+       });
+       res.send({
+          result
+       })
+  }
+  catch(err)
+  {
+    res.json({
+      err:err.message
+     })
+  }
+}
+module.exports = {accessChat,fetchchats};
