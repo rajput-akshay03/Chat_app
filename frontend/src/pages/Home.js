@@ -8,6 +8,7 @@ function HomePage(){
      const clickhandler1=()=>{
         setTemp(0);
       }
+   
     const clickhandler2=()=>{
         setTemp(1);
       }
