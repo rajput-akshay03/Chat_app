@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import "./css/home.css";
+import { useNavigate } from "react-router-dom";
 function HomePage(){
       const [temp,setTemp] = useState(0);
      const clickhandler1=()=>{
@@ -10,6 +11,14 @@ function HomePage(){
     const clickhandler2=()=>{
         setTemp(1);
       }
+      const navigate = useNavigate();
+    useEffect(()=>{
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if(userInfo)
+        {
+            navigate("/chats")
+        }
+    },[navigate]);
      
     return(
         <div className="main_div">

@@ -1,0 +1,30 @@
+.main{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    align-items: center;
+}
+.div1{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 5px;
+}
+.div2{
+    justify-content:center;
+    margin: auto;
+}
+.div3{
+    margin-right: 20px;
+}
+.div4{
+    margin-right: 150px;
+}
+.image{
+    width: 30px;
+    height: 30px;
+   /* border: 1px solid red; */
+   /* border-radius: 50%; */
+}
