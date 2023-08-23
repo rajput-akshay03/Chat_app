@@ -45,16 +45,19 @@ const accessChat = async(req,res)=>{
 }
 const fetchchats = async(req,res)=>{
   try{
+   
       const result =  await Chat.find({users:{$elemMatch:{$eq:req.user.id}}})
+     
        .populate("users","-password")
        .populate("groupAdmin","-password")
        .populate("latestMessage")
-       .sort({updatedAt:-1}).then(async(result)=>{
-        result = await User.populate(result,{
-          path:"latestMessage.sender",
-          select:"name pic email"
-        })
-       });
+       .sort({updatedAt:-1})
+      //  .then(async(result)=>{
+      //   result = await User.populate(result,{
+      //     path:"latestMessage.sender",
+      //     select:"name pic email"
+      //   })
+      //  });
        res.send({
           result
        })

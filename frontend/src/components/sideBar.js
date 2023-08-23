@@ -4,30 +4,32 @@ import { AiOutlineSearch,AiOutlineBell } from 'react-icons/ai';
 import {RiArrowDropUpLine,RiArrowDropDownLine} from 'react-icons/ri';
 import { Chatcontext } from "../context/ChatProvider";
 const SideBar = ()=>{
-    const user = useContext(Chatcontext);
-    console.log(user)
+    const {user,chats,selectedChat} = useContext(Chatcontext);
+  
     var [temp,setTemp] = useState(0);
     function change(){
         if(temp==0)
-           setTemp(1);
+        {
+          setTemp(1);
+        }
         else
             setTemp(0);
     }
-    const dropdownRef = useRef(null); 
-    const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-          setTemp(0); // Close the dropdown when clicked outside
-        }
-      };
+    // const dropdownRef = useRef(null); 
+    // const handleClickOutside = (event) => {
+    //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    //       setTemp(0); // Close the dropdown when clicked outside
+    //     }
+    //   };
     
-      useEffect(() => {
-        // Attach the event listener when the component mounts
-        document.addEventListener("click", handleClickOutside);
-        return () => {
-          // Clean up the event listener when the component unmounts
-          document.removeEventListener("click", handleClickOutside);
-        };
-      }, []);
+      // useEffect(() => {
+      //   // Attach the event listener when the component mounts
+      //   document.addEventListener("click", handleClickOutside);
+      //   return () => {
+      //     // Clean up the event listener when the component unmounts
+      //     document.removeEventListener("click", handleClickOutside);
+      //   };
+      // }, []);
     return(
         <div className='main'>
              <div className="div1">
@@ -40,14 +42,17 @@ const SideBar = ()=>{
              <div className="div3">
               <AiOutlineBell/>
              </div>
-             <div className="div4">
-                {/* <img className="image" src={user.pic} alt="error" /> */}
+             <div className="div4" onClick={change}>
                 {
-                    temp==0?  <RiArrowDropUpLine onClick={change}/> : <RiArrowDropDownLine onClick={change} />
+                  user==null?null: <img className="image" src={user.pic} alt="error" />
+                }
+               
+                {
+                    <RiArrowDropDownLine  />
                 }
                 {
                     temp==1?
-                    <div className="dropdiv" ref={dropdownRef}>
+                    <div className="dropdiv" >
                         <div>Profile</div>
                         <div>Logout</div>
                     </div>:null

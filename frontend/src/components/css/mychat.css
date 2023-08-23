@@ -1,0 +1,26 @@
+.mains{
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 25%;
+    height: 85%;
+}
+.main-mychat{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.mychat{
+    width: 80%;
+    /* background-color: #E8E8E8; */
+    background-color: #38B8AC;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: small;
+    color: white;
+}
