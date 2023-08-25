@@ -35,8 +35,9 @@ function Login(){
     }
 
     return(
-        <div className="main">
-            <form action="" className="form" onSubmit={handleSubmit}>
+        <div className="mainly">
+          <div>
+          <form action="" className="form" onSubmit={handleSubmit}>
                 <div className="inputs">
                    <label htmlFor="email">Email</label>
                    <input id="email" type="email" className="input" name="email" onChange={inputhandle}/>
@@ -46,8 +47,9 @@ function Login(){
                 <input id="password" type="password" className="input" name="password" onChange={inputhandle}/>
                 </div>
                 <button className="btn" id="btn1"  >Login</button>
+                <button className="btn" id="btn2">Login By Google</button>
             </form>
-            <button className="btn" id="btn2">Login By Google</button>
+          </div>
             <ToastContainer/>
         </div>
     )

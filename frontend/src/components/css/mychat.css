@@ -3,8 +3,9 @@
     border: 1px solid white;
     border-radius: 10px;
     margin-top: 10px;
-    width: 25%;
+    width: 30%;
     height: 85%;
+    margin-left: 10px;
 }
 .main-mychat{
     display: flex;

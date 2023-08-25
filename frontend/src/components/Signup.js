@@ -13,7 +13,7 @@ function Signup(){
             setdata(values=>({...values , [e.target.name]: e.target.value}));
       }
       const handleSubmit=async(e)=>{
-        e.preventDefault();
+        
         if(!formdata.name || !formdata.email || !formdata.password || !formdata.confirm_password)
         {
             console.log("please fill all details");

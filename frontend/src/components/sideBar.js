@@ -3,9 +3,9 @@ import "./css/sidebar.css";
 import { AiOutlineSearch,AiOutlineBell } from 'react-icons/ai';
 import {RiArrowDropUpLine,RiArrowDropDownLine} from 'react-icons/ri';
 import { Chatcontext } from "../context/ChatProvider";
+import axios from "axios"
 const SideBar = ()=>{
-    const {user,chats,selectedChat} = useContext(Chatcontext);
-  
+    const {user,chats,selectedChat,setSelectedChat} = useContext(Chatcontext);
     var [temp,setTemp] = useState(0);
     function change(){
         if(temp==0)
@@ -30,9 +30,65 @@ const SideBar = ()=>{
       //     document.removeEventListener("click", handleClickOutside);
       //   };
       // }, []);
+      const [drawerclass,setdrawerclass] = useState("side-drawer");
+      // function slide(){
+      //      if(drawerclass=="side-drawer")
+      //      {
+      //         setdrawerclass("slider")
+      //      }
+      //      else if (drawerclass=="slider"){
+      //         setdrawerclass("xslider")
+      //      }
+      //      else{
+      //       setdrawerclass("slider")
+      //      }
+      // }
+      const [fetchusername,setfetchusername] = useState();
+      const [searchresult,setsearchresult]  = useState([]);
+      const fetchUser = async(e)=>{
+            setfetchusername(e.target.value)
+      }
+      const searchuser = async()=>{
+           if(!fetchusername)
+           return ;
+          try{
+            const config = {
+              headers:{
+                  Authorization:`Bearer ${user.token}`
+              }
+           }
+           const {data} = await axios.get(`http://localhost:4000/api/user?search=${fetchusername}`,config)
+           setsearchresult(data.Users)
+          }
+          catch(err)
+          {
+                console.log(err)
+          }
+      }
+      const checkingchat = async(event,id)=>{
+        try{
+          const config = {
+            headers:{
+               "Content-type":"application/json",
+                Authorization:`Bearer ${user.token}`
+            }
+         }
+           const {data} = await axios.post("http://localhost:4000/api/chat",{userId:id},config)
+           setSelectedChat(data);
+           console.log(selectedChat)
+        }
+        catch(err)
+        {
+           console.log(err)
+        }
+      } 
+
     return(
+        <div>
         <div className='main'>
-             <div className="div1">
+             <div className="div1" 
+            //  onClick={slide}
+             >
                 <AiOutlineSearch/>
                 search user
              </div>
@@ -58,7 +114,22 @@ const SideBar = ()=>{
                     </div>:null
                 }
              </div>
+             
         </div>
+        <div className="drawerclass">
+             <div>
+                 <h2>search users</h2>
+                 <input type="text" onChange={fetchUser}/>
+                 <button onClick={searchuser}>Go</button>
+             </div>
+             <div>
+              {
+                searchresult.map((user)=>(<div key={user._id} onClick={(event)=>checkingchat(event,user._id)}>{user.name}</div>))
+              }
+             </div>
+        </div>
+        </div>
+        
     )
 }
 export default SideBar;

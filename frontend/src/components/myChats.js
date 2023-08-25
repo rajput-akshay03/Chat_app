@@ -4,17 +4,17 @@ import axios from "axios";
 import "./css/mychat.css"
 const MyChats = ()=>{
     // const user = chatState();
-    const {user,chats,selectedChat,setSelectedChat} = useContext(Chatcontext);
+    const {user,chats,setChats,selectedChat,setSelectedChat} = useContext(Chatcontext);
+    
    const [data,setdata]= useState()
     const fetchChats = async()=>{
-        console.log(user)
+        
         if(!user)
         {
             console.log("not found user")
             return
         }
         else{
-        
             try{
                 const config = {
                     headers:{
@@ -22,8 +22,9 @@ const MyChats = ()=>{
                     }
                  }
                 const {data} = await axios.get("http://localhost:4000/api/chat",config)
+                setChats(data);
                 setdata(data);
-                console.log(data.result)
+               
         }
         catch(err)
         {
@@ -46,7 +47,7 @@ const MyChats = ()=>{
                   
                       data.result.map((chatdata)=>(
                       
-                         <div className="mychat" key={chatdata.id}>{chatdata.isGroupChat==true?chatdata.chatName:chatdata.users[1].name}</div>
+                         <div className="mychat" key={chatdata.id} onClick={()=>{setSelectedChat(chatdata)}}>{chatdata.isGroupChat==true?chatdata.chatName:chatdata.users[1].name}</div>
     ))
                   
                 }

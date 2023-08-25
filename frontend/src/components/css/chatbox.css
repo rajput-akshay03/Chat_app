@@ -1,0 +1,13 @@
+.chatbox{
+    width: 65%;
+    border: 2px solid black;
+    background-color: white;
+    height: 85%;
+    margin-top: 10px;
+}
+.chatheader{
+    padding-top: 3px;
+    padding-bottom: 5px;
+    font-size: xx-large;
+    padding-left: 10px;
+}

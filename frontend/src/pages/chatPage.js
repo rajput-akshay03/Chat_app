@@ -8,8 +8,10 @@ const ChatPage  = ()=>{
     return(
         <div className="miii">
              <SideBar/>
+             <div className="inner-div">
              <MyChats/>
              <ChatBox/>
+             </div>
         </div>
     );
 }
