@@ -48,6 +48,7 @@ const MyMessages = ()=>{
                     )
                    
                      setmessage([...messages,data.message]);
+                     e.target.value=""
                      console.log(messages)
                }
                catch(err)
@@ -70,17 +71,12 @@ const MyMessages = ()=>{
                      </div>
                 </div>
                 :
-                <div>please select chat</div>
+                <div className="selectchat">Please Select Chat !</div>
             }
             </div>
              <div className="inputfield">
-            <input type="text" placeholder="enter message here" onChange={inputmessage} onKeyDown={sendmessage} />
+            <input type="text" placeholder="enter message here" onChange={inputmessage} onKeyDown={sendmessage} className="input"/>
             </div>
-           
-           
-                   
-              
-       
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Chatcontext } from "../context/ChatProvider";
+import { FaPlus } from 'react-icons/fa';
 import axios from "axios";
 import "./css/mychat.css"
 const MyChats = ()=>{
@@ -37,9 +38,9 @@ const MyChats = ()=>{
       },[user])
     return(
         <div className="mains">
-             <div>
+             <div className="mychat-header">
                  <div>My Chats</div>
-                 <div><button>New Group Chat</button></div>
+                 <button className="groupbtn">New Group Chat <FaPlus/></button>
              </div>
              <div className="main-mychat">
               { 
@@ -47,8 +48,12 @@ const MyChats = ()=>{
                   
                       data.result.map((chatdata)=>(
                       
-                         <div className="mychat" key={chatdata.id} onClick={()=>{setSelectedChat(chatdata)}}>{chatdata.isGroupChat==true?chatdata.chatName:chatdata.users[1].name}</div>
-    ))
+                         <div className="mychat" key={chatdata.id} onClick={()=>{setSelectedChat(chatdata)}}>
+                            <div className="cht">{chatdata.isGroupChat==true?chatdata.chatName:chatdata.users[1].name}</div>
+                            <div className="chtlst"> {chatdata.latestMessage.content}</div>
+                            
+                            </div>
+                  ))
                   
                 }
              </div>

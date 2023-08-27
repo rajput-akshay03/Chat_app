@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    height: 60px;
+    height: 50px;
     align-items: center;
 }
 .div1{
@@ -11,16 +11,24 @@
      justify-content: center;
      align-items: center;
      gap: 5px;
+     border: 1px solid black;
+     padding-left: 10px;padding-right: 10px;
+     margin-left: 30px;
+     border-radius: 10px;
+     height: 35px;
+     cursor: pointer;
 }
 .div2{
     justify-content:center;
     margin: auto;
+    font-size: x-large;
+    font-weight: 500;
 }
 .div3{
     margin-right: 20px;
 }
 .div4{
-    margin-right: 150px;
+    margin-right: 5%;
     position: relative;
 }
 .image{
@@ -31,38 +39,109 @@
 }
 .dropdiv{
     position: absolute;
- top: 50px; 
-  right: 0; 
-   background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-.drawerclass{
-    border: 5px solid black;
+    top: 52px; 
+    margin-left: -300%;
     background-color: white;
-    height: 300px;
-    width: 20%;
+    border: 1px solid white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 11vw;
+    height: 13vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.side-drawer{
+    border: 1px solid black;
+    background-color: white;
+    height: 85%;
+    width: 22%;
     position: fixed;
     z-index: 2;
-}
-.side-drawer{
-    transform: translateX(100%);
-    transition: transform 3s linear ;
-}
-.side-drawer{
-    border: 5px solid black;
-    height: 100%;
-   background: white;
-   position: fixed;
-   top: 50px;
-   width: 40%;
-   box-shadow: 1px 0px 7px rgba(0,0,0,0.5); 
-   margin-left: -100%;
+    margin-top: 10px;
+    padding-left: 10px;
+    margin-left: -23%;
  }
+.drawerclass{
+    border: 1px solid black;
+    background-color: white;
+    height: 85%;
+    width: 22%;
+    position: fixed;
+    z-index: 2;
+    margin-top: 10px;
+    padding-left: 10px;
+    margin-left: -23%;
+ transform: translateX(100%) ;
+ transition: transform .3s ease-in;
+}
  .xslider{
-    transform: translateX(-100%);
-    transition: transform 3s linear ; 
-
+    border: 1px solid black;
+    background-color: white;
+    height: 85%;
+    width: 22%;
+    position: fixed;
+    z-index: 2;
+    margin-top: 10px;
+    padding-left: 10px;
+    margin-left: -23%;
+    transform: translateX(0) ;
+    transition: transform .3s ease-in;
  }
- 
+ .inputsearch{
+    width: 60%;
+    padding: 8px;
+    border: 1px solid rgb(212, 207, 197);
+    background-color: rgb(212, 207, 197);
+    border-radius: 10px;
+    outline: none;
+ }
+ .bt{
+    width: 20%;
+    background-color: rgb(247, 247, 91);
+    padding: 8px;
+    border-radius: 10px;
+    margin-left: 8%;
+ }
+ .totalsearcheduser{
+    margin-top: 15px;
+    width: 95%;
+    
+    
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: scroll;
+ }
+ .totalsearcheduser::-webkit-scrollbar {
+    display: none;
+}
+ .searcheduser{
+    background-color: rgb(232, 239, 239);
+    border-radius: 10px ;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+ }
+ .emails{
+    font-size: smaller;
+    display: flex;
+    align-items: center;
+ }
+p{
+   margin-top: 10px;
+}
+.dropdiv-inner{
+   display: flex;
+   height: 40%;
+   align-items: center;
+   padding-left: 10px;
+   border-radius: 10px;
+}
+.dropdiv-inner:hover{
+   background-color: rgb(232, 239, 239);
+}

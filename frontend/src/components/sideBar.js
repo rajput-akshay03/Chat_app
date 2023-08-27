@@ -31,18 +31,18 @@ const SideBar = ()=>{
       //   };
       // }, []);
       const [drawerclass,setdrawerclass] = useState("side-drawer");
-      // function slide(){
-      //      if(drawerclass=="side-drawer")
-      //      {
-      //         setdrawerclass("slider")
-      //      }
-      //      else if (drawerclass=="slider"){
-      //         setdrawerclass("xslider")
-      //      }
-      //      else{
-      //       setdrawerclass("slider")
-      //      }
-      // }
+      function slide(){
+           if(drawerclass=="side-drawer")
+           {
+              setdrawerclass("drawerclass")
+           }
+           else if (drawerclass=="drawerclass"){
+              setdrawerclass("xslider")
+           }
+           else{
+            setdrawerclass("drawerclass")
+           }
+      }
       const [fetchusername,setfetchusername] = useState();
       const [searchresult,setsearchresult]  = useState([]);
       const fetchUser = async(e)=>{
@@ -87,44 +87,44 @@ const SideBar = ()=>{
         <div>
         <div className='main'>
              <div className="div1" 
-            //  onClick={slide}
+             onClick={slide}
              >
-                <AiOutlineSearch/>
-                search user
+                <div className="a1"><AiOutlineSearch/></div>
+                 <div className="a1"><p>search user</p></div>
              </div>
              <div className="div2">
-               chat-talk
+                 Chat-Talk
              </div>
              <div className="div3">
-              <AiOutlineBell/>
+             <AiOutlineBell/>
              </div>
              <div className="div4" onClick={change}>
                 {
                   user==null?null: <img className="image" src={user.pic} alt="error" />
                 }
-               
-                {
-                    <RiArrowDropDownLine  />
-                }
                 {
                     temp==1?
                     <div className="dropdiv" >
-                        <div>Profile</div>
-                        <div>Logout</div>
+                        <div className="dropdiv-inner">My Profile</div>
+                        <div className="dropdiv-inner">Logout</div>
                     </div>:null
                 }
              </div>
              
         </div>
-        <div className="drawerclass">
+        <div className={drawerclass}>
              <div>
-                 <h2>search users</h2>
-                 <input type="text" onChange={fetchUser}/>
-                 <button onClick={searchuser}>Go</button>
+                 <h2>Search users</h2>
+                 <input type="text" onChange={fetchUser} className="inputsearch" placeholder="search user by name"/>
+                 <button onClick={searchuser} className="bt">Go</button>
              </div>
-             <div>
+             <div className="totalsearcheduser">
               {
-                searchresult.map((user)=>(<div key={user._id} onClick={(event)=>checkingchat(event,user._id)}>{user.name}</div>))
+                searchresult.map((user)=>(<div key={user._id} onClick={(event)=>checkingchat(event,user._id)} className="searcheduser">
+                 <div>{user.name}</div>
+                 <div className="emails">Email : {user.email}</div>
+                 
+                  </div>))
               }
              </div>
         </div>

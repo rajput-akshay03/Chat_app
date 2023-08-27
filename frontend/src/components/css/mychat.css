@@ -4,7 +4,7 @@
     border-radius: 10px;
     margin-top: 10px;
     width: 30%;
-    height: 85%;
+    height: 88%;
     margin-left: 10px;
 }
 .main-mychat{
@@ -12,16 +12,39 @@
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    margin-top: 20px;
+    height: 85%;
+    padding-top: 10px;
 }
 .mychat{
     width: 80%;
-    /* background-color: #E8E8E8; */
-    background-color: #38B8AC;
-    border: 1px solid red;
-    border-radius: 5px;
+    background-color: rgb(232, 239, 239);
+   
+    border-radius: 10px;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: small;
-    color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 31px;
+}
+.mychat::-webkit-scrollbar {
+    display: none;
+}
+.mychat-header{
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    gap: 39%;
+    font-size: x-large;
+}
+.groupbtn{
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid rgb(232, 239, 239);
+    border-radius: 8px;
+}
+.chtlst{
+    font-size: smaller;
 }
