@@ -4,7 +4,10 @@ import { AiOutlineSearch,AiOutlineBell } from 'react-icons/ai';
 import {RiArrowDropUpLine,RiArrowDropDownLine} from 'react-icons/ri';
 import { Chatcontext } from "../context/ChatProvider";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import ProfileModel from "./profilemodel";
 const SideBar = ()=>{
+  const navigate = useNavigate();
     const {user,chats,selectedChat,setSelectedChat} = useContext(Chatcontext);
     var [temp,setTemp] = useState(0);
     function change(){
@@ -15,6 +18,15 @@ const SideBar = ()=>{
         else
             setTemp(0);
     }
+    function logout()
+    {  
+       localStorage.removeItem("userInfo");
+       navigate("/");
+       console.log("akshay")
+    }
+    // function profile(){
+    //     setprof("user")
+    // }
     // const dropdownRef = useRef(null); 
     // const handleClickOutside = (event) => {
     //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -90,7 +102,7 @@ const SideBar = ()=>{
              onClick={slide}
              >
                 <div className="a1"><AiOutlineSearch/></div>
-                 <div className="a1"><p>search user</p></div>
+                 <div className="a1"><p>Search User</p></div>
              </div>
              <div className="div2">
                  Chat-Talk
@@ -105,8 +117,10 @@ const SideBar = ()=>{
                 {
                     temp==1?
                     <div className="dropdiv" >
-                        <div className="dropdiv-inner">My Profile</div>
-                        <div className="dropdiv-inner">Logout</div>
+                        <div className="dropdiv-inner" 
+                        // onClick={ProfileModel(user)}
+                        >My Profile</div>
+                        <div className="dropdiv-inner" onClick={logout}>Logout</div>
                     </div>:null
                 }
              </div>
@@ -123,10 +137,10 @@ const SideBar = ()=>{
                 searchresult.map((user)=>(<div key={user._id} onClick={(event)=>checkingchat(event,user._id)} className="searcheduser">
                  <div>{user.name}</div>
                  <div className="emails">Email : {user.email}</div>
-                 
                   </div>))
               }
              </div>
+          
         </div>
         </div>
         

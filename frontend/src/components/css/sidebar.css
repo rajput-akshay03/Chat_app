@@ -144,4 +144,5 @@ p{
 }
 .dropdiv-inner:hover{
    background-color: rgb(232, 239, 239);
+   cursor: pointer;
 }

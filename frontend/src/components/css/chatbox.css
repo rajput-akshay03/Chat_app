@@ -12,4 +12,10 @@
     font-size: xx-large;
     padding-left: 10px;
     height: 8%;
+    display: flex;
+    align-items: center;
+    gap: 80%;
+}
+.eye{
+      background-color: aqua;
 }
