@@ -67,3 +67,9 @@
       height: 99%;
     
  }
+ .lottie{
+    position: fixed;
+    height: 50px;
+    width: 100px;
+    margin-top:-50px ;
+ }

@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { Chatcontext } from "../context/ChatProvider";
 import axios from "axios";
 import './css/message.css'
-import io from "socket.io-client"
+import io from "socket.io-client";
+import Lottie from "react-lottie"
+import animationData from "../animation/animation_llwj21ng.json"
 const ENDPOINT = "http://localhost:4000";
 var socket,selectChatCompare;
 const MyMessages = ()=>{
@@ -12,7 +14,14 @@ const MyMessages = ()=>{
     const [socketConnected,setSocketConnected] = useState(false);
     const [typing,setTyping] = useState(false);
     const [isTyping,setIsTyping] = useState(false);
-
+    const defaultOptions= {
+        loop:true,
+        autoplay:true,
+        animationData:animationData,
+        rendererSettings:{
+            preserveAspectRatio:"xMidYMid slice"
+        }
+    }
     useEffect(()=>{
         socket = io(ENDPOINT);
         if(user!=null)
@@ -134,10 +143,19 @@ const MyMessages = ()=>{
                 <div className="selectchat">Please Select Chat !</div>
             }
             </div>
-            {
-                isTyping?<div>loading...</div>:null
-            }
+           
              <div className="inputfield">
+                {
+                isTyping?<div className="lottie">
+                    <Lottie 
+                     options={defaultOptions}
+                    //  width={70}
+                    //  height={10}
+                    />
+                    </div>:null
+                }
+
+            
             <input type="text" placeholder="enter message here" onChange={inputmessage} onKeyDown={sendmessage} className="input"/>
             </div>
         </div>
