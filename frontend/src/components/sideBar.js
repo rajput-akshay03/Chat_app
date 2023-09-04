@@ -6,10 +6,13 @@ import { Chatcontext } from "../context/ChatProvider";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import ProfileModel from "./profilemodel";
+import NotificationBadge from "react-notification-badge"
+import {Effect} from "react-notification-badge"
 const SideBar = ()=>{
   const navigate = useNavigate();
-    const {user,chats,selectedChat,setSelectedChat} = useContext(Chatcontext);
+    const {user,chats,selectedChat,setSelectedChat,notifications} = useContext(Chatcontext);
     var [temp,setTemp] = useState(0);
+    var[temp2,setTemp2] = useState(0);
     function change(){
         if(temp==0)
         {
@@ -17,6 +20,15 @@ const SideBar = ()=>{
         }
         else
             setTemp(0);
+    }
+    function change2()
+    {
+      if(temp2==0)
+      {
+        setTemp2(1)
+      }
+      else
+      setTemp2(0)
     }
     function logout()
     {  
@@ -107,8 +119,9 @@ const SideBar = ()=>{
              <div className="div2">
                  Chat-Talk
              </div>
-             <div className="div3">
-             <AiOutlineBell/>
+             <div className="div3" onClick={change2}>
+              <NotificationBadge count={notifications.length}/>
+             <AiOutlineBell size="25px"/>
              </div>
              <div className="div4" onClick={change}>
                 {
@@ -122,6 +135,22 @@ const SideBar = ()=>{
                         >My Profile</div>
                         <div className="dropdiv-inner" onClick={logout}>Logout</div>
                     </div>:null
+                }
+                {
+                  temp2==1?
+                  <div className="dropdiv">
+                     {!notifications.length && "No New Messages"}
+                     {
+                       notifications.map((notif)=>
+                         (<div onClick={()=>{setSelectedChat(notif.chat)}}>
+                              {`New Message From ${notif.sender.name}`}
+                         </div>
+                         )
+                       )
+                       
+                     }
+                  </div>
+                  :null
                 }
              </div>
              

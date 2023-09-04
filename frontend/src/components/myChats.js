@@ -3,7 +3,13 @@ import { Chatcontext } from "../context/ChatProvider";
 import { FaPlus } from 'react-icons/fa';
 import axios from "axios";
 import "./css/mychat.css"
+import NewGroup from "./groupModel";
 const MyChats = ()=>{
+    const [grp,setgrp]= useState(false)
+    const groupModel = ()=>{
+          if(grp) setgrp(false)
+          else  setgrp(true)
+    }
     // const user = chatState();
     const {user,chats,setChats,selectedChat,setSelectedChat} = useContext(Chatcontext);
     
@@ -24,8 +30,7 @@ const MyChats = ()=>{
                  }
                 const {data} = await axios.get("http://localhost:4000/api/chat",config)
                 setChats(data);
-                setdata(data);
-               
+                setdata(data);     
         }
         catch(err)
         {
@@ -40,23 +45,22 @@ const MyChats = ()=>{
         <div className="mains">
              <div className="mychat-header">
                  <div>My Chats</div>
-                 <button className="groupbtn">New Group Chat <FaPlus/></button>
+                 {/* <button className="groupbtn" onClick={groupModel}>New Group Chat <FaPlus/></button> */}
              </div>
              <div className="main-mychat">
               { 
                data==null?null:
-                  
                       data.result.map((chatdata)=>(
-                      
                          <div className="mychat" key={chatdata.id} onClick={()=>{setSelectedChat(chatdata)}}>
                             <div className="cht">{chatdata.isGroupChat==true?chatdata.chatName:chatdata.users[1].name}</div>
                             <div className="chtlst"> {chatdata.latestMessage.content}</div>
-                            
                             </div>
                   ))
-                  
                 }
              </div>
+             {
+                    grp==true?<NewGroup/>:null
+                 } 
         </div>
     )
 }

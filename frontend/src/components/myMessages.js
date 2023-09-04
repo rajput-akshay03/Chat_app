@@ -10,7 +10,7 @@ var socket,selectChatCompare;
 const MyMessages = ()=>{
     const [messages,setmessage]= useState([]);
     const [newmessage,setnewmessage]= useState();
-    const {user,selectedChat,setSelectedChat,chats,setChats} = useContext(Chatcontext);
+    const {user,selectedChat,setSelectedChat,chats,setChats,notifications,setNotifications} = useContext(Chatcontext);
     const [socketConnected,setSocketConnected] = useState(false);
     const [typing,setTyping] = useState(false);
     const [isTyping,setIsTyping] = useState(false);
@@ -87,14 +87,16 @@ const MyMessages = ()=>{
         socket.on("message recieved",(newMessageRecieved)=>{
             if(!selectChatCompare||selectChatCompare._id != newMessageRecieved.chat._id)
             {
-                // notifications
-               
+                if(!notifications.includes(newMessageRecieved))
+                {
+                    setNotifications([newMessageRecieved,...notifications]);
+                    console.log(notifications)
+                }
             }
             else{
                 setmessage([...messages,newMessageRecieved])
             }
         })
-  
     })
     const sendmessage = async(e)=>
     {     
@@ -149,13 +151,9 @@ const MyMessages = ()=>{
                 isTyping?<div className="lottie">
                     <Lottie 
                      options={defaultOptions}
-                    //  width={70}
-                    //  height={10}
                     />
                     </div>:null
                 }
-
-            
             <input type="text" placeholder="enter message here" onChange={inputmessage} onKeyDown={sendmessage} className="input"/>
             </div>
         </div>
