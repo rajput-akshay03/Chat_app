@@ -13,13 +13,13 @@ const protect = async(req,res,next)=>{
         catch(err)
         {
            res.status(401);
-            throw new Error("not authorized,token failed") 
+        //    throw new ("not authorized,token failed") 
         }
     }
     if(!token)
     {
         res.status(401);
-        throw new Error("not authorized,no token") 
+        // throw new Error("not authorized,no token") 
     }
 }
 module.exports = protect;

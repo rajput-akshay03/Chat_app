@@ -24,9 +24,16 @@ function Login(){
          };
          const {email,password} = formdata
          const {data} =await axios.post("http://localhost:4000/api/user/login",{email,password},config);
-         toast("login successfull");
-         localStorage.setItem("userInfo",JSON.stringify(data));   
-         navigate("/chat")
+         if(data.message!="user not found")
+         {
+           toast("login successfull");
+           localStorage.setItem("userInfo",JSON.stringify(data));   
+           navigate("/chats")
+         }
+         else{
+          console.log(data)
+          toast("wrong password");
+         }
       } 
       catch(err)
       {

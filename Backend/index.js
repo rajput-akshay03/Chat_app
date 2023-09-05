@@ -5,6 +5,7 @@ const userRoutes = require("./routes/userRoutes")
 const chatRoutes = require("./routes/chatRoutes")
 const messageRoutes = require("./routes/messageRoutes")
 const cors = require('cors');
+const path  = require("path");
 dotenv.config();
 connectdb();
 const port = process.env.PORT || 5000;
@@ -14,7 +15,14 @@ app.use(cors());
 app.use('/api/user',userRoutes);
 app.use('/api/chat',chatRoutes);
 app.use('/api/message',messageRoutes);
-const server = app.listen(port, console.log(`running one ${port}`))
+// const __dirname1 = path.resolve();
+const __dirname1 = "C:\\chat app"
+console.log(`the path is ${__dirname1}`)
+const server = app.listen(port, console.log(`running one ${port}`));
+app.use(express.static(path.join(__dirname1,"/frontend/build")))
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname1,"frontend","build","index.html"))
+})
 const io = require("socket.io")(server,{
     pingTimeout:60000,
     cors:{

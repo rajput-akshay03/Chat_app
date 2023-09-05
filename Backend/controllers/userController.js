@@ -45,8 +45,13 @@ const authUser = async(req,res)=>{
     try{
          const {email,password} = req.body;
          const user = await User.findOne({email});
-         
-         
+         if(!user)
+         {
+             console.log("akshay")
+           return res.json({
+                message:"user not found"
+            })
+         }
          if(await bcrypt.compare(password,user.password))
          {  
             const token =  jwt.sign({id:user.id},process.env.JWT_SECRET,

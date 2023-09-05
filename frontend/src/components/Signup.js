@@ -6,7 +6,7 @@ import axios from "axios";
 
 import './css/Login.css'
 function Signup(){
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     
     const [formdata,setdata] = useState({name:"",email:"",password:"",confirm_password:"",picture:""})
       const inputhandle= (e)=>{ 
@@ -40,10 +40,8 @@ function Signup(){
         const pic = formdata.pic;
             const {data} = await axios.post("http://localhost:4000/api/user",{name,email,password,pic},config);
           localStorage.setItem("userInfo",JSON.stringify(data));
-          console.log(formdata)
           toast("signup successfully")
-          
-        //   navigate("/api/user");
+          navigate("/chats");
         } 
       }  
     return(
