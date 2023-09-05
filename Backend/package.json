@@ -2,7 +2,7 @@
   "scripts":{
     "start":"node backend/server.js",
     "server":"nodemon backend/server.js",
-    "build":"cd frontend && npm install --legacy-peer-deps && npm run build"
+    "build":"cd backend && npm install --legacy-peer-deps && cd ../frontend && npm install && npm run build"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
