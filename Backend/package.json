@@ -1,4 +1,10 @@
 {
+  "scripts":{
+    "start":"node backend/server.js",
+    "server":"nodemon backend/server.js",
+    "build":"npm install --legacy-peer-deps && npm install --legacy-peer-deps --prefix frontend && npm run build --prefix frontend"
+
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
