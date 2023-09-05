@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Chatcontext } from "../context/ChatProvider";
 import axios from "axios";
 import './css/message.css'
 import io from "socket.io-client";
 import Lottie from "react-lottie"
-import animationData from "../animation/animation_llwj21ng.json"
+import animationData from "../animation/animation_llwj21ng.json";
 const ENDPOINT = "http://localhost:4000";
 var socket,selectChatCompare;
 const MyMessages = ()=>{
@@ -14,6 +14,7 @@ const MyMessages = ()=>{
     const [socketConnected,setSocketConnected] = useState(false);
     const [typing,setTyping] = useState(false);
     const [isTyping,setIsTyping] = useState(false);
+    const messageEndRef = useRef(null);
     const defaultOptions= {
         loop:true,
         autoplay:true,
@@ -27,7 +28,7 @@ const MyMessages = ()=>{
         if(user!=null)
        { socket.emit("setup",user);}
         socket.on("connected",()=>{setSocketConnected(true) ;})
-        socket.on("typing",()=>setIsTyping(true))
+        // socket.on("typing",()=>setIsTyping(true))
         socket.on("stop typing",()=>setIsTyping(false))
    },[user])
     function inputmessage(e)
@@ -86,11 +87,10 @@ const MyMessages = ()=>{
     useEffect(()=>{
         socket.on("message recieved",(newMessageRecieved)=>{
             if(!selectChatCompare||selectChatCompare._id != newMessageRecieved.chat._id)
-            {
+            {   
                 if(!notifications.includes(newMessageRecieved))
                 {
                     setNotifications([newMessageRecieved,...notifications]);
-                    console.log(notifications)
                 }
             }
             else{
@@ -128,26 +128,31 @@ const MyMessages = ()=>{
                }
           }
     }
+    useEffect(()=>{
+       messageEndRef.current?.scrollIntoView();
+    },[messages])
     
     return(
         <div className="msgbox">
-            <div className="mess">
+            <div className="mess" >
             {
                 selectedChat!=null?
-                <div>
-                      <div>
+                  <div>  
                         {
-                            messages.map((msg)=>(<div key={msg.id} className={msg.sender._id==user._id?"aks":"aks2"}>{console.log("hilla")}{msg.content}</div>))
-                        }
-                     </div>
-                </div>
+                         messages.map((msg)=>(<div key={msg.id} className={msg.sender._id==user._id?"aks":"aks2"}>{msg.content}</div>))       
+                        } 
+                         <div  ref={messageEndRef}/>
+                  </div>  
                 :
                 <div className="selectchat">Please Select Chat !</div>
+               
             }
+            
             </div>
            
              <div className="inputfield">
                 {
+                
                 isTyping?<div className="lottie">
                     <Lottie 
                      options={defaultOptions}

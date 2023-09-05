@@ -5,6 +5,8 @@
     flex-direction: row;
     height: 50px;
     align-items: center;
+    position: fixed;
+   
 }
 .div1{
      display: flex;
@@ -61,18 +63,19 @@
     width: 22%;
     position: fixed;
     z-index: 2;
-    margin-top: 10px;
+    margin-top: 60px;
     padding-left: 10px;
     margin-left: -23%;
  }
 .drawerclass{
     border: 1px solid black;
+    border-radius: 10px;
     background-color: white;
     height: 85%;
     width: 22%;
     position: fixed;
     z-index: 2;
-    margin-top: 10px;
+    margin-top: 60px;
     padding-left: 10px;
     margin-left: -23%;
  transform: translateX(100%) ;
@@ -85,7 +88,7 @@
     width: 22%;
     position: fixed;
     z-index: 2;
-    margin-top: 10px;
+    margin-top: 60px;
     padding-left: 10px;
     margin-left: -23%;
     transform: translateX(0) ;
@@ -101,7 +104,8 @@
  }
  .bt{
     width: 20%;
-    background-color: rgb(247, 247, 91);
+    border: 1px solid rgb(116, 114, 213);
+    background-color: rgb(116, 114, 213);
     padding: 8px;
     border-radius: 10px;
     margin-left: 8%;
@@ -145,4 +149,25 @@ p{
 .dropdiv-inner:hover{
    background-color: rgb(232, 239, 239);
    cursor: pointer;
+}
+.dropdiv2{
+   position: absolute;
+   top: 52px; 
+   margin-left: -300%;
+   background-color: white;
+   border: 1px solid white;
+   border-radius: 10px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   z-index: 1000;
+   width: 12vw;
+   height: 13vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding-left: 5px;
+   padding-right: 5px;
+   font-size: small;
+}
+.drop-div2{
+    scroll-behavior: smooth;
 }

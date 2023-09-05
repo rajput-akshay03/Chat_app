@@ -11,12 +11,10 @@ const ChatBox = ()=>{
             <div className="chatheader">
                     {
                         selectedChat==null?null:<div>{selectedChat.chatName}</div>
-                       
                     }
                      {/* <div className="eye" onClick={ProfileModel(selectedChat)}><AiFillEye/></div> */}
             </div>
-                <MyMessages/>
-            
+         <MyMessages/>
         </div>
     )
 }

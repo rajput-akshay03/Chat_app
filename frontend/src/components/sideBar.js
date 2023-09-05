@@ -10,13 +10,14 @@ import NotificationBadge from "react-notification-badge"
 import {Effect} from "react-notification-badge"
 const SideBar = ()=>{
   const navigate = useNavigate();
-    const {user,chats,selectedChat,setSelectedChat,notifications} = useContext(Chatcontext);
+    const {user,chats,selectedChat,setSelectedChat,notifications,setNotifications} = useContext(Chatcontext);
     var [temp,setTemp] = useState(0);
     var[temp2,setTemp2] = useState(0);
     function change(){
         if(temp==0)
         {
           setTemp(1);
+          setTemp2(0)
         }
         else
             setTemp(0);
@@ -26,6 +27,7 @@ const SideBar = ()=>{
       if(temp2==0)
       {
         setTemp2(1)
+        setTemp(0)
       }
       else
       setTemp2(0)
@@ -138,16 +140,17 @@ const SideBar = ()=>{
                 }
                 {
                   temp2==1?
-                  <div className="dropdiv">
+                  <div className="dropdiv2">
                      {!notifications.length && "No New Messages"}
                      {
                        notifications.map((notif)=>
-                         (<div onClick={()=>{setSelectedChat(notif.chat)}}>
-                              {`New Message From ${notif.sender.name}`}
+                         (<div onClick={()=>{setSelectedChat(notif.chat)
+                            setNotifications(notifications.filter((n)=>n!=notif))
+                         }} className="drop-div2">
+                              {`New message from ${notif.sender.name}`}
                          </div>
                          )
-                       )
-                       
+                       )    
                      }
                   </div>
                   :null
@@ -169,7 +172,6 @@ const SideBar = ()=>{
                   </div>))
               }
              </div>
-          
         </div>
         </div>
         
